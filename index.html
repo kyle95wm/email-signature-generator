@@ -77,7 +77,8 @@
       margin-bottom: 4px;
     }
     .field input,
-    .field textarea {
+    .field textarea,
+    .field select {
       width: 100%;
       font-family: 'Rubik', Arial, sans-serif;
       font-size: 13px;
@@ -87,9 +88,19 @@
       transition: border-color 0.15s;
       color: #222;
       background: #fafafa;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 32px;
+      cursor: pointer;
     }
     .field input:focus,
-    .field textarea:focus {
+    .field textarea:focus,
+    .field select:focus {
       outline: none;
       border-color: #17599A;
       background: #fff;
@@ -104,6 +115,28 @@
       color: #888;
       margin-top: 4px;
     }
+
+    /* Logo row */
+    .logo-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .logo-row input[type="url"] { flex: 1; }
+    .upload-btn {
+      font-family: 'Rubik', Arial, sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 9px 14px;
+      background: #f3f3f3;
+      color: #555;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .upload-btn:hover { background: #e8e8e8; }
 
     /* Color picker */
     .color-row {
@@ -285,12 +318,12 @@
     }
     .page-footer a { color: #17599A; text-decoration: none; }
     .page-footer a:hover { text-decoration: underline; }
-    .bmc-btn {
+    .support-btn {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: #FFDD00;
-      color: #333 !important;
+      background: #0070ba;
+      color: #fff !important;
       font-family: 'Rubik', sans-serif;
       font-size: 13px;
       font-weight: 600;
@@ -300,8 +333,8 @@
       transition: background 0.15s, transform 0.05s;
       margin-bottom: 14px;
     }
-    .bmc-btn:hover { background: #e6c700; text-decoration: none !important; }
-    .bmc-btn:active { transform: translateY(1px); }
+    .support-btn:hover { background: #005ea6; text-decoration: none !important; }
+    .support-btn:active { transform: translateY(1px); }
 
     /* Placeholder preview */
     .preview-placeholder {
@@ -333,7 +366,7 @@
         </div>
         <div class="field">
           <label for="sig-title">Job Title</label>
-          <input id="sig-title" type="text" value="Web Designer &amp; Developer" autocomplete="off" placeholder="e.g. Marketing Manager">
+          <input id="sig-title" type="text" value="Founder" autocomplete="off" placeholder="e.g. Marketing Manager">
         </div>
         <div class="field">
           <label for="sig-company">Company</label>
@@ -346,17 +379,17 @@
       <div class="form-grid">
         <div class="field">
           <label for="sig-phone">Phone</label>
-          <input id="sig-phone" type="text" value="" autocomplete="off" placeholder="+353 (0)1 000 0000">
+          <input id="sig-phone" type="text" value="+353879542125" autocomplete="off" placeholder="+353 (0)1 000 0000">
           <div class="field-hint">Leave blank to hide from signature.</div>
         </div>
         <div class="field">
           <label for="sig-email">Email</label>
-          <input id="sig-email" type="email" value="" autocomplete="off" placeholder="you@example.com">
+          <input id="sig-email" type="email" value="hello@clarkemedia.ie" autocomplete="off" placeholder="you@example.com">
           <div class="field-hint">Leave blank to hide from signature.</div>
         </div>
         <div class="field field-full">
           <label for="sig-website">Website</label>
-          <input id="sig-website" type="text" value="clarkemedia.ie" autocomplete="off" placeholder="example.com">
+          <input id="sig-website" type="text" value="www.clarkemedia.ie" autocomplete="off" placeholder="example.com">
         </div>
       </div>
 
@@ -365,8 +398,25 @@
       <div class="form-grid">
         <div class="field field-full">
           <label for="sig-logo">Logo URL</label>
-          <input id="sig-logo" type="url" value="" autocomplete="off" placeholder="https://example.com/logo.png">
-          <div class="field-hint">Direct link to a PNG or JPG image. Leave blank for a text-only signature.</div>
+          <div class="logo-row">
+            <input id="sig-logo" type="url" value="https://www.clarkemedia.ie/wp-content/uploads/cropped-Clarke-Web-Design-Logo.webp" autocomplete="off" placeholder="https://example.com/logo.png">
+            <label class="upload-btn" for="sig-logo-file">Upload</label>
+            <input id="sig-logo-file" type="file" accept="image/*" style="display: none;">
+          </div>
+          <div class="field-hint">Paste a URL or upload from your computer. Use JPEG format with a white or solid background for best dark mode compatibility — transparent PNGs and WebPs can disappear against dark backgrounds. Uploaded images work in the preview; for the final signature, host the image at a public URL.</div>
+        </div>
+        <div class="field">
+          <label for="sig-font">Font</label>
+          <select id="sig-font">
+            <option value="Arial, Helvetica, sans-serif">Arial</option>
+            <option value="Verdana, Geneva, sans-serif">Verdana</option>
+            <option value="Tahoma, Geneva, sans-serif">Tahoma</option>
+            <option value="'Trebuchet MS', Helvetica, sans-serif">Trebuchet MS</option>
+            <option value="Georgia, 'Times New Roman', serif">Georgia</option>
+            <option value="'Times New Roman', Times, serif">Times New Roman</option>
+            <option value="'Courier New', Courier, monospace">Courier New</option>
+          </select>
+          <div class="field-hint">Web-safe fonts that render reliably across all email clients.</div>
         </div>
         <div class="field">
           <label>Accent Colour</label>
@@ -390,15 +440,15 @@
         </div>
         <div class="field">
           <label for="sig-facebook">Facebook</label>
-          <input id="sig-facebook" type="url" value="" autocomplete="off" placeholder="https://facebook.com/...">
+          <input id="sig-facebook" type="url" value="https://www.facebook.com/clarkemedia.ie/" autocomplete="off" placeholder="https://facebook.com/...">
         </div>
         <div class="field">
           <label for="sig-instagram">Instagram</label>
-          <input id="sig-instagram" type="url" value="" autocomplete="off" placeholder="https://instagram.com/...">
+          <input id="sig-instagram" type="url" value="https://www.instagram.com/clarkemedia.ie/" autocomplete="off" placeholder="https://instagram.com/...">
         </div>
         <div class="field">
           <label for="sig-github">GitHub</label>
-          <input id="sig-github" type="url" value="" autocomplete="off" placeholder="https://github.com/...">
+          <input id="sig-github" type="url" value="https://github.com/clarkemedia" autocomplete="off" placeholder="https://github.com/...">
         </div>
       </div>
       <div class="field-hint" style="margin-top: 8px;">Social icons only appear when a URL is provided.</div>
@@ -516,7 +566,7 @@
   <!-- ============= FOOTER ============= -->
   <footer class="page-footer">
     <div>
-      <a href="https://buymeacoffee.com/clarkemedia" class="bmc-btn" target="_blank" rel="noopener noreferrer">&#9749; Buy me a coffee</a>
+      <a href="https://paypal.me/eoinmcm" class="support-btn" target="_blank" rel="noopener noreferrer">&#9749; Buy me a coffee</a>
     </div>
     <p>
       Made by <a href="https://clarkemedia.ie" target="_blank" rel="noopener noreferrer">Eoin McMahon</a> &middot;
@@ -555,7 +605,7 @@
       var ids = [
         'sig-name', 'sig-title', 'sig-company',
         'sig-phone', 'sig-email', 'sig-website',
-        'sig-logo', 'sig-color', 'sig-color-hex',
+        'sig-logo', 'sig-font', 'sig-color', 'sig-color-hex',
         'sig-linkedin', 'sig-twitter', 'sig-facebook', 'sig-instagram', 'sig-github',
         'sig-disclaimer-toggle', 'sig-disclaimer'
       ];
@@ -595,6 +645,7 @@
           email:     el['sig-email'].value.trim(),
           website:   el['sig-website'].value.trim(),
           logo:      el['sig-logo'].value.trim(),
+          font:      el['sig-font'].value,
           color:     el['sig-color'].value,
           linkedin:  el['sig-linkedin'].value.trim(),
           twitter:   el['sig-twitter'].value.trim(),
@@ -608,7 +659,7 @@
 
       function render() {
         var v = getValues();
-        var f = 'Arial, Helvetica, sans-serif';
+        var f = v.font;
         var c = v.color;
 
         var hasLogo    = !!v.logo;
@@ -776,7 +827,19 @@
         render();
       });
 
+      el['sig-font'].addEventListener('change', render);
       el['sig-disclaimer-toggle'].addEventListener('change', render);
+
+      document.getElementById('sig-logo-file').addEventListener('change', function (e) {
+        var file = e.target.files[0];
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function (ev) {
+          el['sig-logo'].value = ev.target.result;
+          render();
+        };
+        reader.readAsDataURL(file);
+      });
 
       // ============= COPY BUTTONS =============
       var richBtn = document.getElementById('copy-rich');

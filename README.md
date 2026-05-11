@@ -66,4 +66,4 @@ Social icons provided by [Icons8](https://icons8.com).
 
 ---
 
-If this tool saved you time, consider [buying me a coffee ☕](https://buymeacoffee.com/clarkemedia)
+If this tool saved you time, consider [buying me a coffee ☕](https://paypal.me/eoinmcm)
